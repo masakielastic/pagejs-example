@@ -4,7 +4,15 @@ var $el = $('#result');
 var controller = function(context) {
   var path = context.path;
   var name = path === '/' ? 'index' : context.path.substr(1);
-  $el.html(name + ' のページです。');
+  var url = 'content/' + name + '.html';
+
+  $.get(url)
+  .done(function(html) {
+    $el.html(html);
+  })
+  .fail(function() {
+    $el.html('<p>ページは存在しません。</p>');
+  });
 };
 
 page('/', controller);
