@@ -9,6 +9,7 @@ var controller = function(context) {
 
 page('/', controller);
 page('/:name', controller);
+page.start()
 
 $(document.body).on('click', 'a[href]', function(evt) {
 
@@ -19,4 +20,4 @@ $(document.body).on('click', 'a[href]', function(evt) {
     page(href);
     evt.preventDefault();
   }
-}
+});
