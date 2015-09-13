@@ -1,16 +1,31 @@
 page.base('/pagejs-example');
 
 var $el = $('#result');
+var $title = $('title');
+var site_title = 'Page.js の例';
+
 var controller = function(context) {
   var path = context.path;
   var name = path === '/' ? 'index' : context.path.substr(1);
   var url = 'content/' + name + '.html';
 
   $.get(url)
-  .done(function(html) {
-    $el.html(html);
+  .done(function(data) {
+    var splited = data.split(/(-)+/);
+
+    if (splited.length > 1) {
+      var json = (JSON.parse(splited[0]));
+      var title = json.title;
+      var body = splited[2];
+      $('title').html(title +  ' - ' + site_title);
+    } else {
+      var body = data;
+    }
+
+    $el.html(body);
   })
   .fail(function() {
+    $title.html('エラー - ' + site_title);
     $el.html('<p>ページは存在しません。</p>');
   });
 };
