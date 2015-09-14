@@ -1,5 +1,3 @@
-page.base('/pagejs-example');
-
 var $el = $('#result');
 var $title = $('title');
 var site_title = 'Page.js の例';
@@ -30,9 +28,10 @@ var controller = function(context) {
   });
 };
 
+page.base('/pagejs-example');
 page('/', controller);
 page('/:name', controller);
-page.start()
+page.start();
 
 $(document.body).on('click', 'a[href]', function(evt) {
 
